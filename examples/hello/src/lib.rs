@@ -1,3 +1,4 @@
+pub mod portuguese;
 pub mod russian;
 pub mod spanish;
 
