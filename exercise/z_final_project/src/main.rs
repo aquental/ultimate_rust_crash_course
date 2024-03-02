@@ -52,18 +52,63 @@ fn main() {
 
         // **OPTION**
         // Brighten -- see the brighten() function below
+        "brighten" => {
+            if args.len() != 2 {
+                print_usage_and_exit();
+            }
+            let infile = args.remove(0);
+            let outfile = args.remove(0);
+            brighten(infile, outfile);
+        }
 
         // **OPTION**
         // Crop -- see the crop() function below
+        "crop" => {
+            if args.len() != 4 {
+                print_usage_and_exit();
+            }
+            let infile = args.remove(0);
+            let outfile = args.remove(0);
+            let x = args.remove(0).parse::<u32>().unwrap();
+            let y = args.remove(0).parse::<u32>().unwrap();
+            let w = args.remove(0).parse::<u32>().unwrap();
+            let h = args.remove(0).parse::<u32>().unwrap();
+            crop(infile, outfile, x, y, w, h);
+        }
 
         // **OPTION**
         // Rotate -- see the rotate() function below
+        "rotate" => {
+            if args.len() != 3 {
+                print_usage_and_exit();
+            }
+            let infile = args.remove(0);
+            let outfile = args.remove(0);
+            let rot = args.remove(0).parse::<u32>().unwrap();
+            rotate(infile, outfile, rot);
+        }
 
         // **OPTION**
         // Invert -- see the invert() function below
+        "invert" => {
+            if args.len() != 2 {
+                print_usage_and_exit();
+            }
+            let infile = args.remove(0);
+            let outfile = args.remove(0);
+            invert(infile, outfile);
+        }
 
         // **OPTION**
         // Grayscale -- see the grayscale() function below
+        "grayscale" => {
+            if args.len() != 2 {
+                print_usage_and_exit();
+            }
+            let infile = args.remove(0);
+            let outfile = args.remove(0);
+            grayscale(infile, outfile);
+        }
 
         // A VERY DIFFERENT EXAMPLE...a really fun one. :-)
         "fractal" => {
@@ -76,6 +121,13 @@ fn main() {
 
         // **OPTION**
         // Generate -- see the generate() function below -- this should be sort of like "fractal()"!
+        "generate" => {
+            if args.len() != 1 {
+                print_usage_and_exit();
+            }
+            let outfile = args.remove(0);
+            generate(outfile);
+        }
 
         // For everything else...
         _ => {
@@ -90,7 +142,12 @@ fn print_usage_and_exit() {
     println!("fractal OUTFILE");
     // **OPTION**
     // Print useful information about what subcommands and arguments you can use
-    // println!("...");
+    println!("generate OUTFILE");
+    println!("invert INFILE OUTFILE");
+    println!("grayscale INFILE OUTFILE");
+    println!("rotate INFILE OUTFILE ROTATION");
+    println!("brighten INFILE OUTFILE");
+    println!("crop INFILE OUTFILE X Y WIDTH HEIGHT");
     std::process::exit(-1);
 }
 
